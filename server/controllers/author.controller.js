@@ -11,7 +11,7 @@ Author.find({}).sort("name")
 module.exports.findOneSingleAuthor = (req, res) => {
 	Author.findOne({ _id: req.params.id })
 		.then(oneSingleAuthor => res.json({ author: oneSingleAuthor }))
-		.catch(err => res.json({ message: "Something went wrong", error: err }));
+		.catch(err => res.status(400).json( err));
 };
 
 //create a new Author
