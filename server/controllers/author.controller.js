@@ -2,7 +2,12 @@ const Author = require("../models/author.model") // author model
 
 // return all authors
 module.exports.findAllAuthors = (req, res) => {
-Author.find({}).sort("name")
+  //sort descending
+  // var mySort = { name: -1 };
+   //sort ascending
+  var mySort = { name: 1 };
+  //.collation({locale: "en" }) dealing with 'A' and 'a' as same language and order
+Author.find({}).collation({locale: "en" }).sort(mySort)
     .then(allAuthors => res.json({ authors: allAuthors }))
     .catch(err => res.json({ message: "Something went wrong", error: err }));
 };
